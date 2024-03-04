@@ -17,21 +17,58 @@
 # end
 
 #populate 676 products with fake data
-require "faker"
+# require "faker"
 
-# set the random seed to get the same data every time
-Faker::Config.random = Random.new(42)
+# # set the random seed to get the same data every time
+# Faker::Config.random = Random.new(42)
 
-676.times do
-  Product.create(
-    title: Faker::Commerce.product_name,
-    price: Faker::Commerce.price(range: 0..100.0, as_string: true),
-    stock_quantity: Faker::Number.between(from: 0, to: 100)
-  )
+# 676.times do
+#   Product.create(
+#     title: Faker::Commerce.product_name,
+#     price: Faker::Commerce.price(range: 0..100.0, as_string: true),
+#     stock_quantity: Faker::Number.between(from: 0, to: 100)
+#   )
+# end
+
+# puts "676 products created successfully."
+
+#pull data from csv file
+require "csv"
+
+csv_file = Rails.root.join("db/products.csv") # path to the csv file containing the data
+csv_data = File.read(csv_file)# read the file into a string using the File.read method
+
+products = CSV.parse(csv_data, headers: true, encoding: "ISO-8859-1") # parse the CSV data into an array of rows using the CSV.parse method,headers: true option to tell the parser to treat the first row as headers
+
+new_products = []
+current_time = Time.current
+
+products.each do |product|
+
+  # create categories
+  category = Category.find_or_create_by!(name: product["category"]) # find a category with the name from the CSV file in the database so that we don't create duplicate categories
+  # create products
+  new_product = Product.new(
+    title: product["name"],
+    description: product["description"],
+    price: product["price"],
+    stock_quantity: product["stock quantity"],
+    category_id: category.id,
+    created_at: current_time,
+    updated_at: current_time
+
+  )# create a new product object with the data from the CSV file
+
+  # if new_product.save
+  #   puts "Product created successfully."
+  # else
+  #   puts "Failed to create product: #{new_product.errors.full_messages.join(", ")}"
+  # end
+
+  new_products << new_product
 end
 
-puts "676 products created successfully."
-
-
+Product.insert_all!(new_products.map(&:attributes))# use the insert_all! method to insert all the new products into the database in a single query
+puts "Products created successfully."# print a message to the console to indicate that the products were created successfully
 
 
