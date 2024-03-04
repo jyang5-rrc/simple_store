@@ -29,6 +29,10 @@ gem "jbuilder"
 # faker gem for generating fake data
 gem "faker"
 
+# Bootstrap
+gem 'bootstrap', '~> 4.3.1'
+gem 'jquery-rails'
+
 # scssc file support
 gem "sassc-rails"
 
