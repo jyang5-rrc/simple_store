@@ -1,15 +1,41 @@
 
-.products-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px; // Creates space between grid items
-  justify-content: center; // Center grid items horizontally
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 20px;
+  background-color: #f4f4f4;
+  color: #333;
 }
 
-.product-card {
-  border: 1px solid #ddd; // Adds a border around each product card
-  padding: 20px;
-  width: 200px; // Sets a fixed width for each product card
-  text-align: center; // Center-aligns the text inside the card
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1); // Adds a subtle shadow around each card
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+.products-table {
+  width: 80%;
+  border-collapse: collapse;
+  margin: 20px auto; /* Center table */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.products-table th,
+.products-table td {
+  text-align: left;
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+.products-table th {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* Striped rows */
+.products-table tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+
+/* Hover effect */
+.products-table tr:hover {
+  background-color: #ddd;
 }
