@@ -4,5 +4,6 @@
 
 <p>Price: $<%= @product.price %></p>
 <p>Stock Quantity: <%= @product.stock_quantity %></p>
+<p>Category: <%= @product.category.name %></p>
 
 <%= link_to 'Back to Products', products_path %>
