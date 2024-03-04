@@ -29,6 +29,9 @@ gem "jbuilder"
 # faker gem for generating fake data
 gem "faker"
 
+# scssc file support
+gem "sassc-rails"
+
 # Use Redis adapter to run Action Cable in production
 gem "redis", ">= 4.0.1"
 

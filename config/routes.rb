@@ -8,4 +8,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  root "products#index" # means that when the user navigates to the root of the application, they will be directed to the index action of the products controller.
+  resources :products # creates a set of routes for the products resource, including the index action.
 end
